@@ -2,21 +2,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Transform orientation;
+    [SerializeField] Transform orientation, feet;
+    public LayerMask whatIsGround;
     public Rigidbody rb;
 
     Vector3 moveDirection;
 
     [SerializeField] float z, x;
-    public float moveSpeed;
+    [SerializeField] bool jumped, isGrounded;
+    public float moveSpeed, jumpForce, gravityForce;
 
 
     void Update()
     {
-        z = Input.GetAxis("Horizontal");
-        x = Input.GetAxis("Vertical");
-
-        moveDirection = orientation.forward * x + orientation.right * z;
+        PlayerInput();
     }
 
     void FixedUpdate()
@@ -24,8 +23,30 @@ public class PlayerController : MonoBehaviour
         Movement();
     }
 
+    void PlayerInput()
+    {
+        z = Input.GetAxis("Horizontal");
+        x = Input.GetAxis("Vertical");
+
+        isGrounded = Physics.CheckSphere(feet.position, 0.25f, whatIsGround);
+
+        moveDirection = orientation.forward * x + orientation.right * z;
+
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            jumped = true;
+        }
+    }
+
     void Movement()
     {
-        rb.velocity = moveDirection * moveSpeed * Time.deltaTime;
+
+        rb.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, rb.velocity.y - gravityForce, moveDirection.z * moveSpeed * Time.deltaTime);
+
+        if(jumped)
+        {
+            rb.velocity = Vector3.up * jumpForce * Time.deltaTime;
+            jumped = false;
+        }
     }
 }
