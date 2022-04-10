@@ -7,7 +7,8 @@ public class PlayerLook : MonoBehaviour
     
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     
@@ -17,7 +18,7 @@ public class PlayerLook : MonoBehaviour
         mouseY = Input.GetAxisRaw("Mouse Y");
 
         yRotation += mouseX * sens;
-        xRotation -= mouseY * sens;
+        xRotation -= mouseY * sens;  
 
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
