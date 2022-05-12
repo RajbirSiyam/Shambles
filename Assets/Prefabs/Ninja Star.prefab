@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7365536740711666213}
   - component: {fileID: 4095728381718126875}
   - component: {fileID: 1997123006237359811}
-  - component: {fileID: 452630059}
   m_Layer: 0
   m_Name: Ninja Star
   m_TagString: Untagged
@@ -114,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cff2f69835a42546a09b5d72c15d5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 7365536740711666213}
+  throwables: {fileID: 0}
 --- !u!65 &1997123006237359811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,27 +122,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130080452940769939}
   m_Material: {fileID: 13400000, guid: c782a8e301de7af4693115a78a651f5b, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.090085626, y: 0.0044184015, z: 0.09030594}
   m_Center: {x: -0.000055106357, y: -0.0000000020954758, z: 0.00005488284}
---- !u!95 &452630059
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3130080452940769939}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b54ee9c97d1a9314482fc7b236ba96c5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

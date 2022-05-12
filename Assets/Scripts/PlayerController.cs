@@ -5,20 +5,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CapsuleCollider playerCollider;
     [SerializeField] Transform orientation, feet;
     [SerializeField] LayerMask whatIsGround;
+    [SerializeField] Vector3 moveDirection;
+    [SerializeField] Animator animator;
     [SerializeField] Keybinds keys;
     [SerializeField] Rigidbody rb;
 
-    Vector3 moveDirection;
 
+    public float speed, walkSpeed, sprintSpeed, crouchSpeed, jumpForce, acceleration, gravityForce;
+    [SerializeField] bool isGrounded, sprinting, crouched;
     [SerializeField] float z, x;
     private bool jumped;
-    [SerializeField] bool isGrounded, sprinting, crouched;
-    public float speed, walkSpeed, sprintSpeed, crouchSpeed, jumpForce, acceleration, gravityForce;
-    
+
 
     void Update()
     {
         PlayerInput();
+        PlayerAnimator();
     }
 
     void PlayerInput()
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         moveDirection = orientation.forward * x + orientation.right * z;
 
-        if(Input.GetKeyDown(keys.Jump) && isGrounded && !crouched)
+        if (Input.GetKeyDown(keys.Jump) && isGrounded && !crouched)
         {
             jumped = true;
         }
@@ -38,6 +40,11 @@ public class PlayerController : MonoBehaviour
         {
             jumped = false;
         }
+    }
+
+    void PlayerAnimator()
+    {
+        animator.SetFloat("Speed", x);
     }
 
     void FixedUpdate()
@@ -53,7 +60,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector3(moveDirection.x * speed * Time.deltaTime, rb.velocity.y - gravityForce, moveDirection.z * speed * Time.deltaTime);
 
         //Jump
-        if(jumped && !crouched)
+        if (jumped && !crouched)
         {
             rb.velocity = Vector3.up * jumpForce * Time.deltaTime;
             jumped = false;
@@ -70,15 +77,16 @@ public class PlayerController : MonoBehaviour
         }
 
         //Crouch
-        if(Input.GetKey(keys.Crouch))
+        if (Input.GetKey(keys.Crouch))
         {
-            playerCollider.height = 0.065f;
+            playerCollider.height = 2;
+            playerCollider.center = new Vector3(0, 1.95f, 0);
             speed = crouchSpeed;
             crouched = true;
         }
         else
         {
-            playerCollider.height = 0.13f;
+            playerCollider.height = 3;
             crouched = false;
         }
 

@@ -3,17 +3,17 @@ using UnityEngine;
 public class Throwables : MonoBehaviour
 {
     [SerializeField] GameObject ninjaStarPrefab;
-    [SerializeField] Transform throwPoint;
     [SerializeField] Keybinds keys;
+    public Transform throwPoint;
 
     public float throwForce;
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(keys.Shoot))
+        if(Input.GetKeyDown(keys.Shoot))
         {
-            Throw ();
+            Throw();
         }
     }
 
