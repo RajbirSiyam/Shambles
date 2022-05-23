@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     [SerializeField] Transform orientation;
+    [SerializeField] PlayerController playerController;
     [SerializeField] float sens, mouseX, mouseY, xRotation, yRotation;
     
     void Start()
@@ -22,7 +23,7 @@ public class PlayerLook : MonoBehaviour
 
         xRotation = Mathf.Clamp(xRotation, -90f, 60f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, playerController.tilt);
         orientation.rotation = Quaternion.Euler(0, yRotation, transform.rotation.z);
     }
 }

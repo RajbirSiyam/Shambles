@@ -6,5 +6,4 @@ public class Keybinds : MonoBehaviour
     public KeyCode Sprint;
     public KeyCode Crouch;
     public KeyCode Shoot;
-    public KeyCode Slide;
 }
